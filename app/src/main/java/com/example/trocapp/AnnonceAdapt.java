@@ -2,6 +2,7 @@ package com.example.trocapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +55,25 @@ public class AnnonceAdapt extends RecyclerView.Adapter<AnnonceAdapt.MyViewHolder
         holder.nom_produit.setText(myitems.getNom_produit());
         holder.date_publication.setText(myitems.getDate_Ajout());
         Picasso.get().load(myitems.getImage()).into(holder.image);
+        holder.hiddentext.setText(myitems.getHiddenID());
         holder.user.setText(myitems.getNom_troqueur());
 
+        holder.troquer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,Activity_view_all.class);
+                intent.putExtra("IDproduit1",holder.hiddentext.getText().toString());
+                context.startActivity(intent);
+                //TrocProduit trocProduit = new TrocProduit();
+                //trocProduit.produitId2= holder.hiddentext.getText().toString();
+                //trocProduit.user1 = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        String userId = myitems.getUserId();
+                //FirebaseDatabase.getInstance().getReference().child("InformationTroc").push().child("offert").setValue(trocProduit);
+            }
+        });
+
+
+    String userId = myitems.getUserId();
         DatabaseReference userRef = databaseReference.child("Registered Users").child(userId).child("profileImageUrl");
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -115,14 +131,19 @@ public class AnnonceAdapt extends RecyclerView.Adapter<AnnonceAdapt.MyViewHolder
         private final TextView date_publication;
         private final TextView user;
         private final TextView details ;
+        Button troquer;
+
+        private final TextView hiddentext;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             image =itemView.findViewById(R.id.image);
+            troquer = itemView.findViewById(R.id.button_troquer);
             profil=itemView.findViewById(R.id.imageView);
             nom_produit = itemView.findViewById(R.id.nom_produit);
             date_publication = itemView.findViewById(R.id.date);
             user=itemView.findViewById(R.id.user);
             details = itemView.findViewById(R.id.details);
+            hiddentext = itemView.findViewById(R.id.hiddenTextView);
         }
     }
 

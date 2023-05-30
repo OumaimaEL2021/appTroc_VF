@@ -110,7 +110,9 @@ public class Home extends AppCompatActivity {
                 myItemsList.clear();
 
                 for(DataSnapshot Produits : snapshot.child("Produits").getChildren()){
-                    for(DataSnapshot elemnt : Produits.getChildren()){final String userId=elemnt.child("userId").getValue(String.class);
+                    for(DataSnapshot elemnt : Produits.getChildren()){
+                        final String hiddenID = elemnt.getKey();
+                        final String userId=elemnt.child("userId").getValue(String.class);
                     final String getnom_produit = elemnt.child("nom_produit").getValue(String.class);
                     final String getImage = elemnt.child("image").getValue(String.class);
                     final String getcategorie= elemnt.child("categorie").getValue(String.class);
@@ -129,7 +131,7 @@ public class Home extends AppCompatActivity {
                     }
 
                     //showDialogWithProductDetails(getdescrip, getcategorie);
-                    MyItems myItems = new MyItems(userId,getcategorie,getdescrip, getImage, getnom_produit, getdate,getuser);
+                    MyItems myItems = new MyItems(userId,getcategorie,getdescrip, getImage, getnom_produit, getdate,getuser,hiddenID);
                     myItemsList.add(myItems);
                 }
                 }

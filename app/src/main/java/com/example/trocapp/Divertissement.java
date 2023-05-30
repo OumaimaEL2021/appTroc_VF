@@ -92,13 +92,14 @@ public class Divertissement extends AppCompatActivity {
                 myItemsList.clear();
                 for(DataSnapshot Produits : snapshot.child("Produits").getChildren()){
                     for(DataSnapshot elemnt : Produits.getChildren()){
+                        final String hiddenID = elemnt.getKey();
                         final String userId=elemnt.child("userId").getValue(String.class);
                         final String getnom_produit = elemnt.child("nom_produit").getValue(String.class);
                         final String getImage = elemnt.child("image").getValue(String.class);
                         final String getcategorie= elemnt.child("categorie").getValue(String.class);
                         final String getdescrip = elemnt.child("description").getValue(String.class);
                         final String getdate = elemnt.child("date_Ajout").getValue(String.class);
-                        MyItems myItems = new MyItems(userId,getcategorie,getdescrip, getImage, getnom_produit, getdate,"nom_troqueur");
+                        MyItems myItems = new MyItems(userId,getcategorie,getdescrip, getImage, getnom_produit, getdate,"nom_troqueur",hiddenID);
                         if (getcategorie != null && getcategorie.equals("Divertissement")) {
                             myItemsList.add(myItems);
                         }

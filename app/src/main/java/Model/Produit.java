@@ -7,6 +7,17 @@ public class Produit {
     String categorie="";
     String date_Ajout="";
 
+    String hidden="";
+
+
+    public String getHidden(){
+        return hidden;
+    }
+
+    public void setHidden(String hidden1){
+        hidden = hidden1;
+    }
+
     public String getUserId() {
         return userId;
     }

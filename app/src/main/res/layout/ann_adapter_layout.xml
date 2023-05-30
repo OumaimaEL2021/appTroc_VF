@@ -73,6 +73,13 @@
 
                     android:text="TextView" />
 
+                <TextView
+                    android:id="@+id/hiddenTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="Hidden Text" />
+
             </LinearLayout>
 
 
@@ -107,7 +114,7 @@
                 />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_troquer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
