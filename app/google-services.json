@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "233344822098",
+    "firebase_url": "https://barter-application-8a427-default-rtdb.firebaseio.com",
+    "project_id": "barter-application-8a427",
+    "storage_bucket": "barter-application-8a427.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233344822098:android:4aef7e2124ad6ae9de288b",
+        "android_client_info": {
+          "package_name": "com.example.trocapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233344822098-ht07r1rkumeki82ac0d6tdlu6uggetka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCya6GLSPJ7y9HE3_qUvd89TmoO9NNeiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233344822098-ht07r1rkumeki82ac0d6tdlu6uggetka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
