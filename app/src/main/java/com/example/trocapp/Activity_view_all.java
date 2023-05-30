@@ -107,8 +107,9 @@ public class Activity_view_all extends AppCompatActivity implements  MyAdapter.o
                                 Toast.makeText(Activity_view_all.this, "Request send", Toast.LENGTH_SHORT).show();
                                 Intent intent = getIntent();
                                 String valeurRecuperee = intent.getStringExtra("IDproduit1");
-
+                                String defaultEtatOffre = "pending";
                                 offert.setProduitId2(valeurRecuperee);
+                                offert.setEtat(defaultEtatOffre);
                                 FirebaseDatabase.getInstance().getReference().child("Offres").child(userId).push().setValue(offert);
                                 //onCardSelected(value);offert.setProduitId1(value);
                                 System.out.println(offert.produitId1 +"  "+offert.produitId2);

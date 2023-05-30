@@ -5,6 +5,16 @@ public class Offert {
         // public  String user1 ,user2;
         public  String produitId1, produitId2 ;
 
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    public String etat = "pending";
+
         public Offert(){
 
         }
