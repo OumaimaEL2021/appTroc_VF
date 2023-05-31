@@ -259,13 +259,14 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
             tools:context=".Catalogue"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="5dp"

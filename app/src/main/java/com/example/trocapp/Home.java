@@ -168,11 +168,11 @@ public class Home extends AppCompatActivity {
                     startActivity(intent2);
                     return true;
                 case R.id.menu_chat:
-                    // Action à effectuer pour le menu item 3
+                    Intent intent3 = new Intent(Home.this,ChatPart.class);
+                    startActivity(intent3);
                     return true;
                 case R.id.menu_notification:
-                    Intent intent3 = new Intent(Home.this,NotificationActivity.class);
-                    startActivity(intent3);
+
                     return true;
                 default:
                     return false;

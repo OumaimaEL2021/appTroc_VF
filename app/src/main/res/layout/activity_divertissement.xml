@@ -263,7 +263,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
+            android:background="@android:color/transparent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="5dp"
             tools:layout_editor_absoluteY="664dp">

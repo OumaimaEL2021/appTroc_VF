@@ -3,6 +3,7 @@ package com.example.trocapp;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -55,6 +56,20 @@ public class AdaptAnnocaCategorie extends RecyclerView.Adapter<AdaptAnnocaCatego
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {}
         });
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DescriptionProduit.class);
+                intent.putExtra("Description",myitems.getDescription());
+                intent.putExtra("dateAjout",myitems.getDate_Ajout());
+                intent.putExtra("imageId",myitems.getImage());
+                intent.putExtra("nom_du_produit",myitems.getNom_produit());
+                intent.putExtra("user",myitems.getNom_troqueur());
+                intent.putExtra("idProduit",myitems.getHiddenID());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
 

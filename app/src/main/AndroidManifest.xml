@@ -19,10 +19,19 @@
         android:theme="@style/Theme.TrocApp"
         tools:targetApi="31">
         <activity
+            android:name=".DescriptionProduit"
+            android:exported="false" />
+        <activity
             android:name=".Activity_view_all"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Chatt"
+            android:exported="false" />
+        <activity
+            android:name=".ChatPart"
             android:exported="false" />
         <activity
             android:name=".NotificationActivity"

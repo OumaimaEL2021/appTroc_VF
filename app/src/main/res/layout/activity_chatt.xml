@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Chatt">
+   <RelativeLayout
+       android:id="@+id/topBar"
+       android:background="@drawable/search_inter"
+       android:elevation="80dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" >
+       <ImageView
+           android:id="@+id/backBtn"
+           android:layout_width="35dp"
+           android:layout_height="35dp"
+           android:background="@drawable/round_back_light_10"
+           android:paddingStart="12sp"
+           android:paddingEnd="2dp"
+           android:layout_centerVertical="true"
+           android:layout_marginStart="20dp"
+           android:src="@drawable/baseline_arrow_back_ios_24"
+           android:layout_marginTop="40dp"/>
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:layout_centerVertical="true"
+           android:layout_marginTop="40dp"
+           android:layout_marginStart="20dp"
+           android:src="@drawable/baseline_account_circle_24"
+           android:id="@+id/profilePic"
+           android:layout_toEndOf="@+id/backBtn"
+           />
+       <LinearLayout
+           android:layout_marginStart="10dp"
+           android:layout_centerVertical="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+            android:orientation="vertical"
+           android:layout_toEndOf="@+id/profilePic">
+           <TextView
+               android:id="@+id/name"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="user_name"
+               android:maxLines="1"
+               android:textColor="#424242"
+               android:textStyle="bold"
+               android:textSize="18sp"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="13sp"
+               android:text="Online"
+               android:layout_marginTop="2dp"
+               android:textColor="#00C853"/>
+
+
+
+       </LinearLayout>
+   </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topBar"
+        android:id="@+id/chattingRecyclview"
+        android:layout_above="@+id/bottomBar"/>
+
+
+    <RelativeLayout
+        android:layout_marginBottom="5dp"
+        android:elevation="80dp"
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/message_inter"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+        <EditText
+
+            android:background="@drawable/search_inter"
+            android:id="@+id/editmessage"
+            android:layout_toStartOf="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="14sp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="5dp"
+            android:hint="Type semething ...."/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/send"
+            android:src="@drawable/baseline_send_24"
+            android:layout_alignParentEnd="true"
+            android:elevation="100dp"
+            android:layout_marginEnd="5dp"/>
+            
+    </RelativeLayout>
+</RelativeLayout>

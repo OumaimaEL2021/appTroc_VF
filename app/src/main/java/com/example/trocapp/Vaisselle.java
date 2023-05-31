@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Vaisselle extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class Vaisselle extends AppCompatActivity {
     private String categorie;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private final List<MyItems> myItemsList = new ArrayList<>();
-
+    private String getuser="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +101,15 @@ public class Vaisselle extends AppCompatActivity {
                         final String getcategorie= elemnt.child("categorie").getValue(String.class);
                         final String getdescrip = elemnt.child("description").getValue(String.class);
                         final String getdate = elemnt.child("date_Ajout").getValue(String.class);
-                        MyItems myItems = new MyItems(userId,getcategorie,getdescrip, getImage, getnom_produit, getdate,"ee",hiddenID);
-                        if (getcategorie != null && getcategorie.equals("Vaiselle")) {
+                        for(DataSnapshot user : snapshot.child("Registered Users").getChildren()){
+                            String id = user.getKey();
+                            if (userId.equals(id)) {
+                                HashMap<String, Object> userData = (HashMap<String, Object>) user.getValue();
+                                getuser = (String) userData.get("nomComplet");
+                            }
+                        }
+                        MyItems myItems = new MyItems(userId,getcategorie,getdescrip, getImage, getnom_produit, getdate, getuser,hiddenID);
+                        if (getcategorie != null && getcategorie.equals("Vaisselle")) {
                             myItemsList.add(myItems);
                         }
 
@@ -128,7 +136,8 @@ public class Vaisselle extends AppCompatActivity {
                     startActivity(intent2);
                     return true;
                 case R.id.menu_chat:
-                    // Action à effectuer pour le menu item 3
+                    Intent intent3 = new Intent(Vaisselle.this,ChatPart.class);
+                    startActivity(intent3);
                     return true;
                 case R.id.menu_notification:
                     // Action à effectuer pour le menu item 3
