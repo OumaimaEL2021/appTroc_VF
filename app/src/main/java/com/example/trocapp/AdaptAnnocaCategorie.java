@@ -42,6 +42,8 @@ public class AdaptAnnocaCategorie extends RecyclerView.Adapter<AdaptAnnocaCatego
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         MyItems myitems = items.get(position);
         holder.titleTextView.setText(myitems.getNom_produit());
+        if (!myitems.getImage().isEmpty()) {
+
         Picasso.get().load(myitems.getImage()).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -55,7 +57,7 @@ public class AdaptAnnocaCategorie extends RecyclerView.Adapter<AdaptAnnocaCatego
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {}
-        });
+        }); }
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

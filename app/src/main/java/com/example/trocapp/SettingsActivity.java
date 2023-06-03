@@ -89,7 +89,9 @@ public class SettingsActivity extends AppCompatActivity {
                             textViewCountry.setText(country);
                             textViewCity.setText(city);
                             textViewDescription.setText(description);
-                            Picasso.get().load(profilImage).into(profileImageView);
+                            if (!profilImage.isEmpty()) {
+                                Picasso.get().load(profilImage).into(profileImageView);}
+
 
 
                         }

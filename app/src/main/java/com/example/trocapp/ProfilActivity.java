@@ -40,6 +40,7 @@ public class ProfilActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     String userId;
     Toolbar toolbar ;
+    String profile="";
 
 
     @Override
@@ -87,9 +88,11 @@ public class ProfilActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.child("Registered Users").getChildren()) {
                     if(snapshot.getKey().equals(userId)){
                         String nomComplet = snapshot.child("nomComplet").getValue(String.class);
-                        String profile= snapshot.child("profileImageUrl").getValue(String.class);
+                         profile= snapshot.child("profileImageUrl").getValue(String.class);
                         nom.setText(nomComplet);
-                        Picasso.get().load(profile).into(profileImage);
+                        if (!profile.isEmpty()) {
+                        Picasso.get().load(profile).into(profileImage);}
+
 
                     }
 

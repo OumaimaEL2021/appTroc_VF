@@ -47,7 +47,8 @@ public class adapter_recycle extends RecyclerView.Adapter<adapter_recycle.MyView
         holder.ed.setId(position);
         holder.del.setId(position);
         String idann=an.getIDannonce();
-        Picasso.get().load(an.getImage()).error(R.drawable.images).into(holder.image);
+        if (!an.getImage().isEmpty()) {
+        Picasso.get().load(an.getImage()).error(R.drawable.images).into(holder.image);}
         holder.ed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

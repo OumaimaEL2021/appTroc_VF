@@ -64,7 +64,7 @@
                         app:shapeAppearanceOverlay="@style/roundedimg"
                         app:strokeColor="#41c1ba"
                         app:strokeWidth="2dp"
-                        android:src="@drawable/images" />
+                        android:src="@drawable/baseline_account_circle_24"/>
 
                     <TextView
                         android:id="@+id/prenom"

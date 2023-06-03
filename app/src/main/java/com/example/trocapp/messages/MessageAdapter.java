@@ -38,7 +38,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
         MessageList list2 =messageLists.get(position);
         holder.name.setText(list2.getName());
         holder.lastmessage.setText(list2.getLastMessages());
-        Picasso.get().load(list2.getProfilePic()).into(holder.profilePic);
+        if (!list2.getProfilePic().isEmpty()) {
+        Picasso.get().load(list2.getProfilePic()).into(holder.profilePic);}
         if(list2.getUnseenMessages()==0){
             holder.unseenmessages.setVisibility(View.GONE);
             holder.lastmessage.setTextColor(Color.parseColor("#959595"));

@@ -3,63 +3,123 @@ package com.example.trocapp.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.trocapp.LoginActivity;
 import com.example.trocapp.R;
+import com.example.trocapp.adapter_recycle_pending;
+import com.example.trocapp.annonces_pending;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Pending_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class Pending_Fragment extends Fragment {
+    RecyclerView recyclerView;
+    DatabaseReference databaseReference;
+    ArrayList<annonces_pending> liste1;
+    ArrayList<String> mesannonces;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public Pending_Fragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Pending_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Pending_Fragment newInstance(String param1, String param2) {
+    public static Pending_Fragment newInstance() {
         Pending_Fragment fragment = new Pending_Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        super.onCreate(savedInstanceState);}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pending_, container, false);
+        View view= inflater.inflate(R.layout.fragment_pending_, container, false);
+        recyclerView = view.findViewById(R.id.rec2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        liste1= new ArrayList<>();
+        mesannonces=new ArrayList<String>();
+        recyclerView.setAdapter(new adapter_recycle_pending(getContext(),liste1));
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        // Query the database for the products
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot dataSnapshot) {
+                liste1.clear();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                for (DataSnapshot snapshot : dataSnapshot.child("Produits").getChildren()) {
+                    if(snapshot.getKey().equals(userId)){
+                        for(DataSnapshot elmnts: snapshot.getChildren()){
+                            mesannonces.add(elmnts.getKey());}
+                    }
+                }
+
+
+
+
+                for (DataSnapshot snapshot : dataSnapshot.child("Offres").getChildren()) {
+                    if(snapshot.getKey().equals(userId)==false){
+                        String IDuser=snapshot.getKey();
+                        for(DataSnapshot elmnts: snapshot.getChildren()){
+
+                            if(mesannonces.contains(elmnts.child("produitId2").getValue(String.class))&& elmnts.child("etat").getValue(String.class).equals("pending") )
+                            {
+                                String getproduitId1 = elmnts.child("produitId1").getValue(String.class);
+                                String getproduitId2 = elmnts.child("produitId2").getValue(String.class);
+                                String IDannonce = elmnts.getKey();
+                                String getImage1="";
+                                String getImage2="";
+
+                                for(DataSnapshot s : dataSnapshot.child("Produits").getChildren()){
+                                    for(DataSnapshot e: s.getChildren()){
+                                        if(getproduitId1.equals(e.getKey())){
+                                            getImage1=e.child("image").getValue(String.class);
+                                        }
+                                        else if(getproduitId2.equals(e.getKey())){
+                                            getImage2=e.child("image").getValue(String.class);
+                                        }
+
+                                    }
+
+                                }
+                                annonces_pending an = new annonces_pending(getproduitId1,getImage1,getproduitId2,getImage2,IDannonce,IDuser);
+                                liste1.add(an);
+
+                            }}
+                    }
+
+                    //annonces an = snapshot.getValue(annonces.class);
+
+                }
+                recyclerView.setAdapter(new adapter_recycle_pending(getContext(),liste1));
+            }
+
+            @Override
+            public void onCancelled( DatabaseError databaseError) {
+
+                Log.e("MyFragment", "Error getting data", databaseError.toException());
+            }
+        });
+        return view;
     }
 }

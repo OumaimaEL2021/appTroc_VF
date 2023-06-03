@@ -172,7 +172,8 @@ public class Home extends AppCompatActivity {
                     startActivity(intent3);
                     return true;
                 case R.id.menu_notification:
-
+                    Intent intentp = new Intent(Home.this,NotificationActivity.class);
+                    startActivity(intentp);
                     return true;
                 default:
                     return false;

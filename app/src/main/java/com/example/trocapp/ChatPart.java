@@ -128,7 +128,9 @@ public class ChatPart extends AppCompatActivity {
                         });
                     }else{
                         final String getPhoto = user.child("profileImageUrl").getValue(String.class);
-                        Picasso.get().load(getPhoto).into(maphoto);
+                        if (!getPhoto.isEmpty()) {
+                            Picasso.get().load(getPhoto).into(maphoto);}
+
                     }
                 }
             }
